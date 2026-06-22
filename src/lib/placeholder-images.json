@@ -1,3 +1,22 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero",
+      "description": "Futuristic architecture for hero background",
+      "imageUrl": "https://picsum.photos/seed/portfolio-hero/1200/800",
+      "imageHint": "futuristic architecture"
+    },
+    {
+      "id": "profile",
+      "description": "Minimalist portrait for about page",
+      "imageUrl": "https://picsum.photos/seed/profile-fluxion/800/800",
+      "imageHint": "minimalist person portrait"
+    },
+    {
+      "id": "proj1",
+      "description": "Abstract tech visual",
+      "imageUrl": "https://picsum.photos/seed/67/800/600",
+      "imageHint": "abstract tech"
+    }
+  ]
 }
