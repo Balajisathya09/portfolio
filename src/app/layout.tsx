@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
