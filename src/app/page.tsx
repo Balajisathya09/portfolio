@@ -5,44 +5,13 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="bg-background">
-      {/* Hero Section - Full Screen Typography with Professional Technical Background */}
+      {/* Hero Section - Centered Minimalist Typography */}
       <section className="min-h-screen flex flex-col justify-center px-12 relative overflow-hidden">
-        {/* Professional Background System */}
+        {/* Minimalist Background System */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Base Atmospheric Glows */}
-          <div className="absolute top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-primary/5 rounded-full blur-[150px] animate-pulse duration-[10s]" />
-          <div className="absolute bottom-1/4 -right-1/4 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] animate-pulse duration-[8s]" />
-          
-          {/* Animated Perspective Grid */}
-          <div 
-            className="absolute inset-0 opacity-[0.03]"
-            style={{
-              backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-              backgroundSize: '80px 80px',
-              maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)',
-              transform: 'perspective(1000px) rotateX(60deg) translateY(-20%)',
-              transformOrigin: 'top'
-            }}
-          />
-
-          {/* Floating Technical Markers (Macro Animation Feel) */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(6)].map((_, i) => (
-              <div 
-                key={i}
-                className="absolute w-[1px] h-32 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-float"
-                style={{
-                  left: `${15 + (i * 15)}%`,
-                  top: `${Math.random() * 60}%`,
-                  animationDelay: `${i * 1.5}s`,
-                  animationDuration: `${15 + Math.random() * 10}s`
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Central Scanning Beam */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-1/2 w-full animate-in slide-in-from-top duration-[10s] repeat-infinite opacity-10" />
+          {/* Subtle Atmospheric Glows */}
+          <div className="absolute top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-primary/5 rounded-full blur-[150px] opacity-50" />
+          <div className="absolute bottom-1/4 -right-1/4 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] opacity-30" />
         </div>
 
         <div className="max-w-screen-2xl mx-auto w-full flex flex-col items-center justify-center text-center pt-32 z-10 relative">
@@ -77,11 +46,11 @@ export default function Home() {
 
           {/* Technical Metadata Decoration */}
           <div className="absolute bottom-[-10vh] left-0 right-0 flex justify-between items-end px-4 hidden xl:flex">
-            <div className="flex flex-col gap-2 opacity-20">
+            <div className="flex flex-col gap-2 opacity-10">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">V.2025 // STABLE</span>
               <span className="text-[8px] font-black tracking-widest text-white uppercase">LAT: 40.7128° N, 74.0060° W</span>
             </div>
-            <div className="flex flex-col gap-2 opacity-20 items-end">
+            <div className="flex flex-col gap-2 opacity-10 items-end">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">INTERACTION PHASE: 01</span>
               <div className="w-24 h-[1px] bg-white" />
             </div>
@@ -92,16 +61,13 @@ export default function Home() {
       {/* Narrative Section - Word Reveal - Sticky Scroller */}
       <section className="bg-black">
         <NarrativeScroll 
-          className="text-xl md:text-2xl font-headline font-light uppercase tracking-[0.2em] leading-[1.8] text-center text-white"
+          className="text-xl md:text-2xl font-headline font-light uppercase tracking-[0.2em] leading-[1.8] text-center text-white px-12"
           text="WE ARE NOT JUST BUILDING INTERFACES. WE ARE CRAFTING NARRATIVES IN THE DIGITAL VOID. PRECISION IS OUR ONLY RELIGION. EVERY PIXEL IS A CHOICE."
         />
       </section>
 
       {/* Featured Experiment */}
-      <section className="px-12 py-60 relative overflow-hidden">
-        {/* Decorative Grid Line */}
-        <div className="absolute top-0 left-1/2 w-[1px] h-32 bg-gradient-to-b from-primary/50 to-transparent" />
-        
+      <section className="px-12 py-60 relative overflow-hidden bg-black/50">
         <div className="max-w-screen-2xl mx-auto">
           <div className="flex justify-between items-end mb-32 border-b border-white/5 pb-20">
             <div>
@@ -114,7 +80,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
-            <div className="relative aspect-video rounded-sm overflow-hidden border border-white/5 bg-card grayscale hover:grayscale-0 transition-all duration-1000 group shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
+            <div className="relative aspect-video rounded-sm overflow-hidden border border-white/5 bg-card grayscale hover:grayscale-0 transition-all duration-1000 group">
               <img 
                 src="https://picsum.photos/seed/vortex-gold/1200/800"
                 alt="Vortex Engine"
