@@ -5,12 +5,44 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="bg-background">
-      {/* Hero Section - Full Screen Typography */}
+      {/* Hero Section - Full Screen Typography with Professional Technical Background */}
       <section className="min-h-screen flex flex-col justify-center px-12 relative overflow-hidden">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-primary/10 rounded-full blur-[180px] animate-pulse" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:100px_100px]" />
+        {/* Professional Background System */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Base Atmospheric Glows */}
+          <div className="absolute top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-primary/5 rounded-full blur-[150px] animate-pulse duration-[10s]" />
+          <div className="absolute bottom-1/4 -right-1/4 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] animate-pulse duration-[8s]" />
+          
+          {/* Animated Perspective Grid */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+              backgroundSize: '80px 80px',
+              maskImage: 'radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%)',
+              transform: 'perspective(1000px) rotateX(60deg) translateY(-20%)',
+              transformOrigin: 'top'
+            }}
+          />
+
+          {/* Floating Technical Markers (Macro Animation Feel) */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(6)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute w-[1px] h-32 bg-gradient-to-b from-transparent via-primary/20 to-transparent animate-float"
+                style={{
+                  left: `${15 + (i * 15)}%`,
+                  top: `${Math.random() * 60}%`,
+                  animationDelay: `${i * 1.5}s`,
+                  animationDuration: `${15 + Math.random() * 10}s`
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Central Scanning Beam */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-1/2 w-full animate-in slide-in-from-top duration-[10s] repeat-infinite opacity-10" />
         </div>
 
         <div className="max-w-screen-2xl mx-auto w-full flex flex-col items-center justify-center text-center pt-32 z-10 relative">
