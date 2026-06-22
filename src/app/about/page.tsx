@@ -48,6 +48,7 @@ const EXPERIENCE = [
       "Crafted user journeys, prototypes, and stakeholder presentations for experience-led projects",
       "Communication skills that align stakeholders and teams",
       "Leadership cultivated through academic and internship roles",
+      "Typing proficiency ensuring quick, accurate documentation",
       "Created user-centered design solutions and prototypes",
     ],
     tags: ["Figma", "Prototyping", "Layout Design", "Wireframing", "User Research"],
@@ -68,7 +69,7 @@ export default function AboutPage() {
           >
             <span className="text-primary font-bold text-xs uppercase tracking-[0.5em] block">About Me</span>
             <h1 className="text-6xl md:text-7xl font-headline font-bold uppercase text-white tracking-tighter leading-none">
-              Passionate <br /> Designer <br /> & <span className="text-primary">Developer.</span>
+              About <br /> <span className="text-primary">Me.</span>
             </h1>
             <p className="text-xl text-white/60 leading-relaxed font-light max-w-xl">
               I’m a passionate UI/UX Designer and Web Developer with a keen eye for detail and a love for creating beautiful, functional digital experiences. I’ve worked on both UI/UX and web development projects, focusing on user-centered design, clean interfaces, and responsive solutions that bring ideas to life.
@@ -90,14 +91,16 @@ export default function AboutPage() {
           </motion.div>
         </section>
 
-        {/* Skills Section */}
+        {/* Abilities Section */}
         <section className="mb-40">
           <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20 border-b border-white/5 pb-10">
             <div>
-              <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block">Abilities</span>
-              <h2 className="text-4xl font-headline font-bold text-white uppercase tracking-tighter">Technical Mastery.</h2>
+              <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block">My Abilities</span>
+              <h2 className="text-4xl font-headline font-bold text-white uppercase tracking-tighter">My Skills</h2>
             </div>
-            <p className="text-white/40 uppercase text-xs font-bold tracking-widest">Proficiency in Modern Technologies</p>
+            <p className="text-white/40 uppercase text-xs font-bold tracking-widest max-w-xs text-right">
+              I've worked with a variety of technologies in the web development world. Here are the technologies I'm most proficient in.
+            </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
@@ -127,8 +130,12 @@ export default function AboutPage() {
           <section>
             <div className="flex items-center gap-4 mb-12">
               <GraduationCap className="w-6 h-6 text-primary" />
-              <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Academic Journey</h2>
+              <div>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">My Journey</span>
+                <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Education</h2>
+              </div>
             </div>
+            <p className="text-xs text-white/30 uppercase tracking-widest mb-12">My academic background and educational qualifications.</p>
             <div className="space-y-12">
               {EDUCATION.map((edu, idx) => (
                 <div key={idx} className="relative pl-10 border-l border-white/5">
@@ -147,12 +154,16 @@ export default function AboutPage() {
           <section>
             <div className="flex items-center gap-4 mb-12">
               <Briefcase className="w-6 h-6 text-primary" />
-              <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Professional Growth</h2>
+              <div>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">Professional Growth</span>
+                <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Internship Experience</h2>
+              </div>
             </div>
+            <p className="text-xs text-white/30 uppercase tracking-widest mb-12">My hands-on experience and learning during internships.</p>
             {EXPERIENCE.map((exp, idx) => (
               <div key={idx} className="bg-white/5 border border-white/10 p-10 rounded-3xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-4 block">Internship Experience | {exp.year}</span>
+                <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-4 block">Internship | {exp.year}</span>
                 <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
                 <p className="text-sm text-white/40 font-bold uppercase tracking-widest mb-8">{exp.company}</p>
                 
@@ -182,20 +193,23 @@ export default function AboutPage() {
           <section className="bg-white/5 border border-white/10 p-12 rounded-3xl">
             <div className="flex items-center gap-4 mb-10">
               <Target className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-headline font-bold text-white uppercase tracking-tighter">Core Strengths</h2>
+              <div>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">Core Strengths</span>
+                <h2 className="text-2xl font-headline font-bold text-white uppercase tracking-tighter">Key Responsibilities</h2>
+              </div>
             </div>
             <div className="space-y-8">
               <StrengthItem 
-                title="Communication" 
-                desc="Aligning stakeholders and teams, ensuring clear collaboration across all project phases."
+                title="Communication Skills" 
+                desc="Communication skills that align stakeholders and teams, ensuring clear understanding and collaboration across all project phases."
               />
               <StrengthItem 
                 title="Leadership" 
-                desc="Guiding teams and driving project success through academic and internship roles."
+                desc="Leadership cultivated through academic and internship roles, demonstrating ability to guide teams and drive project success."
               />
               <StrengthItem 
-                title="Quick Learner" 
-                desc="Adapting to new technologies and frameworks efficiently for rapid development."
+                title="Quick learner" 
+                desc="Quick learner with ability to adapt to new technologies and frameworks efficiently for project development and team collaboration."
               />
             </div>
           </section>
@@ -203,8 +217,12 @@ export default function AboutPage() {
           <section className="bg-white/5 border border-white/10 p-12 rounded-3xl">
             <div className="flex items-center gap-4 mb-10">
               <Languages className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-headline font-bold text-white uppercase tracking-tighter">Languages</h2>
+              <div>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">Languages Known</span>
+                <h2 className="text-2xl font-headline font-bold text-white uppercase tracking-tighter">Fluency</h2>
+              </div>
             </div>
+            <p className="text-xs text-white/30 uppercase tracking-widest mb-10">Languages I speak and write fluently.</p>
             <div className="space-y-6">
               {["English", "Tamil"].map(lang => (
                 <div key={lang} className="flex justify-between items-center border-b border-white/5 pb-4">
