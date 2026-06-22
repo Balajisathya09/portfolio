@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Download } from "lucide-react";
 import KineticLogo from "./KineticLogo";
-import Magnetic from "./Magnetic";
 
 const NAV_ITEMS = [
   { name: "Home", path: "/" },
@@ -30,32 +29,29 @@ export default function Navigation() {
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.path;
           return (
-            <Magnetic key={item.path} strength={0.4}>
-              <Link
-                href={item.path}
-                className={cn(
-                  "relative text-[10px] font-black uppercase tracking-[0.4em] transition-colors duration-200 hover:text-primary py-2 px-4",
-                  isActive ? "text-primary" : "text-white/50"
-                )}
-              >
-                {item.name}
-                {isActive && (
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
-                )}
-              </Link>
-            </Magnetic>
+            <Link
+              key={item.path}
+              href={item.path}
+              className={cn(
+                "relative text-[10px] font-black uppercase tracking-[0.4em] transition-colors duration-200 hover:text-primary py-2 px-4",
+                isActive ? "text-primary" : "text-white/50"
+              )}
+            >
+              {item.name}
+              {isActive && (
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
+              )}
+            </Link>
           );
         })}
       </div>
 
       <div className="pointer-events-auto hidden md:block">
-        <Magnetic strength={0.2}>
-          <button 
-            className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.4em] bg-primary px-8 py-3.5 rounded-full text-black hover:bg-white transition-all active:scale-95 shadow-lg shadow-primary/20"
-          >
-            Resume <Download className="w-3 h-3" />
-          </button>
-        </Magnetic>
+        <button 
+          className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.4em] bg-primary px-8 py-3.5 rounded-full text-black hover:bg-white transition-all active:scale-95 shadow-lg shadow-primary/20"
+        >
+          Resume <Download className="w-3 h-3" />
+        </button>
       </div>
     </nav>
   );
