@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -29,13 +30,6 @@ export default function Footer() {
             </motion.a>
           ))}
         </div>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20"
-        >
-          copyrights@balaji.s 2026
-        </motion.div>
       </div>
     </footer>
   );
