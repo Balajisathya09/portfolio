@@ -4,10 +4,38 @@
 import NarrativeScroll from "@/components/NarrativeScroll";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
+
+const CAPABILITIES = [
+  {
+    title: "WEB DEVELOPER",
+    desc: "ARCHITECTING HIGH-PERFORMANCE APPLICATIONS.",
+    image: "https://picsum.photos/seed/webdev-stack/1920/1080",
+    hint: "coding setup"
+  },
+  {
+    title: "FIGMA DESIGNER",
+    desc: "CRAFTING CINEMATIC USER EXPERIENCES.",
+    image: "https://picsum.photos/seed/figma-stack/1920/1080",
+    hint: "design software"
+  },
+  {
+    title: "VIDEO EDITOR",
+    desc: "MANIPULATING TEMPORAL NARRATIVES.",
+    image: "https://picsum.photos/seed/video-stack/1920/1080",
+    hint: "video editing"
+  }
+];
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
   return (
     <div className="bg-background">
       {/* Hero Section */}
@@ -63,12 +91,12 @@ export default function Home() {
           </motion.div>
 
           {/* Technical Metadata Decoration */}
-          <div className="absolute bottom-[-10vh] left-0 right-0 flex justify-between items-end px-4 hidden xl:flex">
-            <div className="flex flex-col gap-2 opacity-10">
+          <div className="absolute bottom-10 left-12 right-12 flex justify-between items-end hidden xl:flex opacity-10">
+            <div className="flex flex-col gap-2">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">V.2025 // STABLE</span>
               <span className="text-[8px] font-black tracking-widest text-white uppercase">LAT: 13.0827° N, 80.2707° E</span>
             </div>
-            <div className="flex flex-col gap-2 opacity-10 items-end">
+            <div className="flex flex-col gap-2 items-end">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">INTERACTION PHASE: 01</span>
               <div className="w-24 h-[1px] bg-white" />
             </div>
@@ -84,69 +112,38 @@ export default function Home() {
         />
       </section>
 
-      {/* Capabilities & Highlights Section */}
+      {/* Stacked Cards Section */}
+      <section ref={containerRef} className="h-[400vh] relative bg-black">
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          {CAPABILITIES.map((cap, index) => (
+            <CapabilityCard 
+              key={index} 
+              cap={cap} 
+              index={index} 
+              total={CAPABILITIES.length} 
+              progress={scrollYProgress} 
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Bottom Achievement Section */}
       <section className="py-60 px-12 bg-black border-t border-white/5">
-        <div className="max-w-7xl mx-auto space-y-60">
-          
-          {/* What I Do */}
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
-            >
-              <Image 
-                src="https://picsum.photos/seed/what-i-do/1200/800" 
-                alt="Capabilities" 
-                fill 
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                data-ai-hint="minimal workspace"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="space-y-12"
             >
               <div>
-                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">My Capability</span>
-                <h2 className="text-5xl md:text-7xl font-headline font-bold text-white uppercase tracking-tighter leading-none">
-                  WHAT I <br /><span className="text-primary">DO.</span>
-                </h2>
-              </div>
-              <div className="space-y-4">
-                <p className="text-xs md:text-sm text-white font-bold uppercase tracking-[0.4em] leading-relaxed">
-                  I ARCHITECT HIGH-PERFORMANCE WEB APPLICATIONS.
-                </p>
-                <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.4em] leading-relaxed">
-                  I DESIGN CINEMATIC USER EXPERIENCES IN FIGMA.
-                </p>
-                <p className="text-xs md:text-sm text-white/20 uppercase tracking-[0.4em] leading-relaxed">
-                  I ENGINEER SCALABLE SYSTEMS WITH MODERN TOOLS.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* What I've Done */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-2 lg:order-1 space-y-12"
-            >
-              <div className="text-right lg:text-left">
-                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">Achievements</span>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">History</span>
                 <h2 className="text-5xl md:text-7xl font-headline font-bold text-white uppercase tracking-tighter leading-none">
                   WHAT I'VE <br /><span className="text-primary">DONE.</span>
                 </h2>
               </div>
-              <div className="space-y-4 text-right lg:text-left">
+              <div className="space-y-4">
                 <p className="text-xs md:text-sm text-white font-bold uppercase tracking-[0.4em] leading-relaxed">
                   I'VE DEPLOYED SEAMLESS HOTEL MANAGEMENT SYSTEMS.
                 </p>
@@ -163,7 +160,7 @@ export default function Home() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="order-1 lg:order-2 relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
+              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
             >
               <Image 
                 src="https://picsum.photos/seed/what-i-done/1200/800" 
@@ -175,9 +172,59 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent" />
             </motion.div>
           </div>
-
         </div>
       </section>
     </div>
+  );
+}
+
+function CapabilityCard({ cap, index, total, progress }: { cap: any, index: number, total: number, progress: any }) {
+  const start = index / total;
+  const end = (index + 1) / total;
+  
+  // Create entrance animation: cards slide up and scale in
+  const translateY = useTransform(progress, [start - 0.1, start], ["100%", "0%"]);
+  const scale = useTransform(progress, [start, end], [1, 0.9]);
+  const opacity = useTransform(progress, [start, end - 0.05], [1, 0.2]);
+
+  return (
+    <motion.div 
+      style={{ 
+        y: index === 0 ? 0 : translateY,
+        scale: index === total - 1 ? 1 : scale,
+        opacity: index === total - 1 ? 1 : opacity,
+        zIndex: index 
+      }}
+      className="absolute inset-0 w-full h-screen flex items-center justify-center bg-black"
+    >
+      <div className="relative w-full h-full">
+        <Image 
+          src={cap.image} 
+          alt={cap.title} 
+          fill 
+          className="object-cover grayscale opacity-50"
+          data-ai-hint={cap.hint}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
+        
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="space-y-6"
+          >
+            <span className="text-primary font-bold text-[10px] md:text-xs uppercase tracking-[1em] block mb-4">Capability {index + 1}</span>
+            <h2 className="text-6xl md:text-[10vw] font-headline font-bold text-white uppercase tracking-tighter leading-none">
+              {cap.title.split(' ')[0]} <br />
+              <span className="text-primary stroke-text">{cap.title.split(' ')[1]}</span>
+            </h2>
+            <p className="text-[10px] md:text-xs text-white/40 font-black uppercase tracking-[0.5em] max-w-xl mx-auto leading-relaxed pt-8">
+              {cap.desc}
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
   );
 }
