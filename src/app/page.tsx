@@ -126,54 +126,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Bottom Achievement Section */}
-      <section className="py-60 px-12 bg-black border-t border-white/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              <div>
-                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">History</span>
-                <h2 className="text-5xl md:text-7xl font-headline font-bold text-white uppercase tracking-tighter leading-none">
-                  WHAT I'VE <br /><span className="text-primary">DONE.</span>
-                </h2>
-              </div>
-              <div className="space-y-4">
-                <p className="text-xs md:text-sm text-white font-bold uppercase tracking-[0.4em] leading-relaxed">
-                  I'VE DEPLOYED SEAMLESS HOTEL MANAGEMENT SYSTEMS.
-                </p>
-                <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.4em] leading-relaxed">
-                  I'VE ARCHITECTED MODERN FITNESS WEB PLATFORMS.
-                </p>
-                <p className="text-xs md:text-sm text-white/20 uppercase tracking-[0.4em] leading-relaxed">
-                  I'VE PROTOTYPED GLOBAL ENTERTAINMENT UI/UX FLOWS.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
-            >
-              <Image 
-                src="https://picsum.photos/seed/what-i-done/1200/800" 
-                alt="Achievements" 
-                fill 
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-                data-ai-hint="abstract technology"
-              />
-              <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
