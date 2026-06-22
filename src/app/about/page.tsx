@@ -3,6 +3,8 @@
 
 import { motion } from "framer-motion";
 import { BookOpen, Briefcase, Code, GraduationCap, Languages, Target } from "lucide-react";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
+import Image from "next/image";
 
 const SKILLS = [
   { name: "UI/UX Design" },
@@ -56,6 +58,8 @@ const EXPERIENCE = [
 ];
 
 export default function AboutPage() {
+  const profileImage = PlaceHolderImages.find(img => img.id === 'profile');
+
   return (
     <div className="pt-32 pb-20 px-8">
       <div className="max-w-7xl mx-auto">
@@ -80,13 +84,17 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 group"
+            className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 group bg-card"
           >
-            <img 
-              src="https://picsum.photos/seed/balaji-profile/800/800" 
-              alt="Balaji" 
-              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
-            />
+            {profileImage && (
+              <Image 
+                src={profileImage.imageUrl} 
+                alt="Balaji Profile" 
+                fill
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                data-ai-hint={profileImage.imageHint}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
           </motion.div>
         </section>
