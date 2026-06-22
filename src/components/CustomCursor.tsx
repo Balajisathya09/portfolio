@@ -33,9 +33,9 @@ export default function CustomCursor() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
-      {/* Precision Dot */}
+      {/* Precision Dot - No Glow/Aura */}
       <motion.div
-        className="absolute top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full mix-blend-difference"
+        className="absolute top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full"
         style={{
           x: mouseX,
           y: mouseY,
@@ -44,9 +44,9 @@ export default function CustomCursor() {
         }}
       />
       
-      {/* Kinetic Follower Ring */}
+      {/* Follower Ring */}
       <motion.div
-        className="absolute top-0 left-0 w-12 h-12 border border-primary/30 rounded-full"
+        className="absolute top-0 left-0 w-10 h-10 border border-primary/30 rounded-full"
         style={{
           x: cursorX,
           y: cursorY,
@@ -54,10 +54,9 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          scale: isPointer ? 1.5 : 1,
+          scale: isPointer ? 1.4 : 1,
           borderColor: isPointer ? "rgba(255, 215, 0, 0.8)" : "rgba(255, 215, 0, 0.3)",
         }}
-        transition={{ type: "spring", damping: 30, stiffness: 200 }}
       />
     </div>
   );

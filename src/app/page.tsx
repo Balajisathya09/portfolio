@@ -90,18 +90,6 @@ export default function Home() {
               </button>
             </div>
           </motion.div>
-
-          {/* Technical Metadata Decoration */}
-          <div className="absolute bottom-10 left-12 right-12 flex justify-between items-end hidden xl:flex opacity-10">
-            <div className="flex flex-col gap-2">
-              <span className="text-[8px] font-black tracking-widest text-white uppercase">V.2025 // STABLE</span>
-              <span className="text-[8px] font-black tracking-widest text-white uppercase">LAT: 13.0827° N, 80.2707° E</span>
-            </div>
-            <div className="flex flex-col gap-2 items-end">
-              <span className="text-[8px] font-black tracking-widest text-white uppercase">INTERACTION PHASE: 01</span>
-              <div className="w-24 h-[1px] bg-white" />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -135,7 +123,6 @@ function CapabilityCard({ cap, index, total, progress }: { cap: any, index: numb
   const start = index / total;
   const end = (index + 1) / total;
   
-  // Create entrance animation: cards slide up and scale in
   const translateY = useTransform(progress, [start - 0.1, start], ["100%", "0%"]);
   const scale = useTransform(progress, [start, end], [1, 0.9]);
   const opacity = useTransform(progress, [start, end - 0.05], [1, 0.2]);
