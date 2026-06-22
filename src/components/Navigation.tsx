@@ -21,11 +21,9 @@ export default function Navigation() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-12 py-8 pointer-events-none">
       <div className="pointer-events-auto">
-        <Magnetic strength={0.2}>
-          <Link href="/">
-            <KineticLogo />
-          </Link>
-        </Magnetic>
+        <Link href="/">
+          <KineticLogo />
+        </Link>
       </div>
 
       <div className="hidden md:flex items-center gap-10 pointer-events-auto bg-black/60 backdrop-blur-xl px-10 py-3 rounded-full border border-white/10 shadow-2xl">

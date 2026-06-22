@@ -55,21 +55,9 @@ export default function CustomCursor() {
         }}
         animate={{
           scale: isPointer ? 1.5 : 1,
-          backgroundColor: isPointer ? "rgba(255, 215, 0, 0.15)" : "transparent",
           borderColor: isPointer ? "rgba(255, 215, 0, 0.8)" : "rgba(255, 215, 0, 0.3)",
         }}
         transition={{ type: "spring", damping: 30, stiffness: 200 }}
-      />
-
-      {/* Dynamic Background Glow */}
-      <motion.div
-        className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
       />
     </div>
   );
