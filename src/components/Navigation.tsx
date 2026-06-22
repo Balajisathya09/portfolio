@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -5,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import KineticLogo from "./KineticLogo";
 import { cn } from "@/lib/utils";
+import { Download } from "lucide-react";
 
 const NAV_ITEMS = [
   { name: "Home", path: "/" },
@@ -49,12 +51,11 @@ export default function Navigation() {
       </div>
 
       <div className="pointer-events-auto hidden md:block">
-        <Link 
-          href="/contact" 
-          className="text-[9px] font-black uppercase tracking-[0.4em] border border-primary/20 bg-primary/5 px-8 py-4 hover:bg-primary hover:text-black transition-all duration-500 text-primary hover:border-primary"
+        <button 
+          className="flex items-center gap-3 text-[9px] font-black uppercase tracking-[0.4em] bg-primary px-8 py-4 rounded-full text-black hover:scale-105 transition-all shadow-[0_4px_20px_rgba(255,215,0,0.3)]"
         >
-          Project Inquiry
-        </Link>
+          Download Resume <Download className="w-3 h-3" />
+        </button>
       </div>
     </nav>
   );
