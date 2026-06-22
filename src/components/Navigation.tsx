@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -18,14 +17,14 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-8 py-6 pointer-events-none">
+    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-12 py-10 pointer-events-none">
       <div className="pointer-events-auto">
-        <Link href="/" className="block">
+        <Link href="/">
           <KineticLogo />
         </Link>
       </div>
 
-      <div className="hidden md:flex items-center gap-1 bg-black/40 backdrop-blur-xl border border-white/5 rounded-full p-1 pointer-events-auto">
+      <div className="hidden md:flex items-center gap-12 pointer-events-auto">
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.path;
           return (
@@ -33,16 +32,15 @@ export default function Navigation() {
               key={item.path}
               href={item.path}
               className={cn(
-                "relative px-6 py-2 text-sm font-medium transition-colors hover:text-primary",
-                isActive ? "text-primary" : "text-white/60"
+                "relative text-[10px] font-medium uppercase tracking-[0.3em] transition-all duration-500 hover:text-white",
+                isActive ? "text-white" : "text-white/40"
               )}
             >
               {item.name}
               {isActive && (
                 <motion.div
-                  layoutId="nav-active"
-                  className="absolute inset-0 bg-white/5 rounded-full -z-10"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  layoutId="nav-dot"
+                  className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"
                 />
               )}
             </Link>
@@ -53,9 +51,9 @@ export default function Navigation() {
       <div className="pointer-events-auto hidden md:block">
         <Link 
           href="/contact" 
-          className="bg-primary text-black px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 active:scale-95 transition-transform"
+          className="text-[10px] font-bold uppercase tracking-[0.3em] border border-white/10 px-6 py-3 hover:bg-white hover:text-black transition-all duration-500"
         >
-          Hire Me
+          Inquiry
         </Link>
       </div>
     </nav>
