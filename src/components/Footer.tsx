@@ -18,7 +18,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           className="text-[10px] font-black uppercase tracking-[0.8em] text-white/20"
         >
-          © 2025 <span className="text-primary/40">BALAJI.S</span>
+          copyrights@balaji.s 2026
         </motion.div>
 
         <div className="flex gap-8">
