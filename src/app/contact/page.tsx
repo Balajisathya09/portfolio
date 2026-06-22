@@ -44,8 +44,8 @@ export default function ContactPage() {
             <h1 className="text-6xl md:text-8xl font-headline font-bold uppercase text-white mb-10 tracking-tighter leading-none">
               Let's <br /><span className="text-primary">Discuss</span> <br />Your vision.
             </h1>
-            <p className="text-white/40 uppercase text-xs font-bold tracking-widest mb-16 max-w-md leading-loose">
-              Let's discuss how I can help bring your ideas to life. Whether you need a complete web application, UI/UX design, or consultation services.
+            <p className="text-white/40 uppercase text-[10px] font-bold tracking-[0.3em] mb-16 max-w-md leading-loose">
+              I'm currently accepting new projects and collaborations. Whether you need a complete web application, UI/UX design, or consultation services, I'm here to help bring your vision to life.
             </p>
             
             <div className="space-y-10">
@@ -53,11 +53,13 @@ export default function ContactPage() {
                 icon={<Mail className="w-5 h-5 text-primary" />} 
                 label="Email" 
                 value="balajisathyanarayanan09062004@gmail.com" 
+                action="Send Message"
               />
               <ContactInfo 
                 icon={<Phone className="w-5 h-5 text-primary" />} 
                 label="Phone" 
                 value="+91 8754544636" 
+                action="Call Now"
               />
               <ContactInfo 
                 icon={<MapPin className="w-5 h-5 text-primary" />} 
@@ -65,97 +67,104 @@ export default function ContactPage() {
                 value="Perambur, Chennai" 
               />
             </div>
+          </motion.div>
 
+          <div className="space-y-12">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-card border border-white/5 p-12 rounded-[2.5rem] backdrop-blur-xl shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-60 h-60 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+              
+              <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Name</label>
+                    <input 
+                      onMouseEnter={playHoverSound}
+                      required 
+                      className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                      placeholder="Your Name"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Email</label>
+                    <input 
+                      onMouseEnter={playHoverSound}
+                      type="email" 
+                      required 
+                      className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                      placeholder="email@example.com"
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Subject</label>
+                  <input 
+                    onMouseEnter={playHoverSound}
+                    required 
+                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                    placeholder="Project Inquiry"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Message</label>
+                  <textarea 
+                    onMouseEnter={playHoverSound}
+                    required 
+                    rows={4} 
+                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/10" 
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
+
+                <button 
+                  disabled={isSubmitting}
+                  className="group w-full bg-primary hover:bg-primary/90 text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl shadow-primary/10"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>
+                      Send Message 
+                      <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </motion.div>
+
+            {/* Availability Box moved below the form */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="mt-20 p-8 border border-primary/10 bg-primary/5 rounded-3xl inline-flex flex-col gap-4"
+              transition={{ delay: 0.3 }}
+              className="p-10 border border-primary/10 bg-primary/5 rounded-[2rem] flex flex-col gap-6"
             >
-              <div className="flex items-center gap-3 text-primary">
-                <Calendar className="w-5 h-5" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Current Availability</span>
+              <div className="flex items-center gap-4 text-primary">
+                <div className="p-3 bg-primary/10 rounded-xl">
+                  <Calendar className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] block">Current Availability</span>
+                  <p className="text-lg text-white font-bold">Available for Work and freelance projects</p>
+                </div>
               </div>
-              <p className="text-sm text-white/60 font-medium">Available for Work and freelance projects</p>
-              <div className="flex items-center gap-2 text-[10px] text-green-400 font-bold uppercase tracking-widest">
-                <CheckCircle2 className="w-3 h-3" /> Accepting New Collaborations
+              <div className="flex items-center gap-3 text-[10px] text-green-400 font-bold uppercase tracking-widest pl-12">
+                <CheckCircle2 className="w-4 h-4" /> Accepting New Collaborations
               </div>
             </motion.div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-card border border-white/5 p-12 rounded-[2.5rem] backdrop-blur-xl shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-60 h-60 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-            
-            <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Name</label>
-                  <input 
-                    onMouseEnter={playHoverSound}
-                    required 
-                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Email</label>
-                  <input 
-                    onMouseEnter={playHoverSound}
-                    type="email" 
-                    required 
-                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
-                    placeholder="email@example.com"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Subject</label>
-                <input 
-                  onMouseEnter={playHoverSound}
-                  required 
-                  className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
-                  placeholder="Project Inquiry"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Message</label>
-                <textarea 
-                  onMouseEnter={playHoverSound}
-                  required 
-                  rows={4} 
-                  className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/10" 
-                  placeholder="Tell me about your project..."
-                />
-              </div>
-
-              <button 
-                disabled={isSubmitting}
-                className="group w-full bg-primary hover:bg-primary/90 text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl shadow-primary/10"
-              >
-                {isSubmitting ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : (
-                  <>
-                    Send Message 
-                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </>
-                )}
-              </button>
-            </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function ContactInfo({ icon, label, value }: { icon: React.ReactNode, label: string, value: string }) {
+function ContactInfo({ icon, label, value, action }: { icon: React.ReactNode, label: string, value: string, action?: string }) {
   return (
     <div className="flex items-center gap-8 group cursor-pointer">
       <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/40 transition-all duration-500 shadow-lg">
@@ -164,6 +173,11 @@ function ContactInfo({ icon, label, value }: { icon: React.ReactNode, label: str
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">{label}</p>
         <p className="text-lg text-white font-bold group-hover:text-primary transition-colors">{value}</p>
+        {action && (
+          <span className="text-[9px] font-black uppercase tracking-widest text-primary/40 mt-1 block group-hover:text-primary transition-colors">
+            {action}
+          </span>
+        )}
       </div>
     </div>
   );
