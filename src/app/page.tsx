@@ -1,14 +1,14 @@
 import NarrativeScroll from "@/components/NarrativeScroll";
 import { ArrowRight, Download, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import KineticCharacter from "@/components/KineticCharacter";
 
 export default function Home() {
   return (
     <div className="bg-background">
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center px-12 relative overflow-hidden">
-        <div className="max-w-screen-2xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="max-w-screen-2xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-32">
           <div className="lg:col-span-8 z-10">
             <div className="flex items-center gap-4 mb-8 overflow-hidden">
               <div className="h-[1px] w-12 bg-primary/40" />
@@ -40,16 +40,8 @@ export default function Home() {
           </div>
 
           <div className="lg:col-span-4 flex items-center justify-center relative">
-            <div className="w-full aspect-[4/5] relative rounded-sm overflow-hidden animate-float grayscale group border border-white/5 bg-card shadow-2xl">
-              <Image 
-                src="https://picsum.photos/seed/balaji-macro/800/1000"
-                alt="Macro Detail"
-                fill
-                className="object-cover group-hover:scale-110 group-hover:grayscale-0 transition-all duration-1000"
-                data-ai-hint="macro technology detail"
-              />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
-            </div>
+            <KineticCharacter />
+            
             {/* Minimal floating tech info */}
             <div className="absolute -bottom-6 -left-6 bg-black border border-white/10 p-6 backdrop-blur-xl hidden xl:block z-20 shadow-2xl">
               <span className="text-[8px] font-black uppercase tracking-[0.5em] text-primary block mb-2">Technical Aura</span>
@@ -81,12 +73,11 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <div className="relative aspect-video rounded-sm overflow-hidden border border-white/5 grayscale hover:grayscale-0 transition-all duration-1000 group shadow-2xl">
-              <Image 
+            <div className="relative aspect-video rounded-sm overflow-hidden border border-white/5 bg-card grayscale hover:grayscale-0 transition-all duration-1000 group shadow-2xl">
+              <img 
                 src="https://picsum.photos/seed/vortex-gold/1200/800"
                 alt="Vortex Engine"
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                 data-ai-hint="liquid metal abstraction"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-16">
