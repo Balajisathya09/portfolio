@@ -1,38 +1,69 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 200 };
-  const cursorX = useSpring(0, springConfig);
-  const cursorY = useSpring(0, springConfig);
+  const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
+  const cursorX = useSpring(mouseX, springConfig);
+  const cursorY = useSpring(mouseY, springConfig);
+
+  const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
 
       const target = e.target as HTMLElement;
       setIsPointer(
         window.getComputedStyle(target).cursor === "pointer" ||
-        target.tagName === "A" ||
-        target.tagName === "BUTTON"
+        target.closest('a') !== null ||
+        target.closest('button') !== null
       );
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [cursorX, cursorY]);
+  }, [mouseX, mouseY]);
 
   return (
-    <>
+    <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
+      {/* Precision Dot */}
       <motion.div
-        className="custom-cursor"
+        className="absolute top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full mix-blend-difference"
+        style={{
+          x: mouseX,
+          y: mouseY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      />
+      
+      {/* Kinetic Follower Ring */}
+      <motion.div
+        className="absolute top-0 left-0 w-12 h-12 border border-primary/30 rounded-full"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isPointer ? 1.5 : 1,
+          backgroundColor: isPointer ? "rgba(255, 215, 0, 0.15)" : "transparent",
+          borderColor: isPointer ? "rgba(255, 215, 0, 0.8)" : "rgba(255, 215, 0, 0.3)",
+        }}
+        transition={{ type: "spring", damping: 30, stiffness: 200 }}
+      />
+
+      {/* Dynamic Background Glow */}
+      <motion.div
+        className="absolute top-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -40,18 +71,6 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
       />
-      <motion.div
-        className="custom-cursor-follower"
-        animate={{
-          x: position.x,
-          y: position.y,
-          translateX: "-50%",
-          translateY: "-50%",
-          scale: isPointer ? 1.5 : 1,
-          backgroundColor: isPointer ? "rgba(255, 255, 255, 0.1)" : "transparent",
-        }}
-        transition={{ type: "spring", damping: 20, stiffness: 100 }}
-      />
-    </>
+    </div>
   );
 }
