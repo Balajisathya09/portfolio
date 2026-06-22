@@ -7,25 +7,26 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const CAPABILITIES = [
   {
     title: "WEB DEVELOPER",
     desc: "ARCHITECTING HIGH-PERFORMANCE APPLICATIONS.",
-    image: "https://picsum.photos/seed/webdev-stack/1920/1080",
-    hint: "coding setup"
+    image: PlaceHolderImages.find(img => img.id === 'capability-web')?.imageUrl || "",
+    hint: "coding laptop"
   },
   {
-    title: "FIGMA DESIGNER",
-    desc: "CRAFTING CINEMATIC USER EXPERIENCES.",
-    image: "https://picsum.photos/seed/figma-stack/1920/1080",
-    hint: "design software"
+    title: "UI/UX DESIGNER",
+    desc: "CRAFTING INTUITIVE USER EXPERIENCES.",
+    image: PlaceHolderImages.find(img => img.id === 'capability-uiux')?.imageUrl || "",
+    hint: "design interface"
   },
   {
     title: "VIDEO EDITOR",
     desc: "MANIPULATING TEMPORAL NARRATIVES.",
-    image: "https://picsum.photos/seed/video-stack/1920/1080",
-    hint: "video editing"
+    image: PlaceHolderImages.find(img => img.id === 'capability-video')?.imageUrl || "",
+    hint: "video timeline"
   }
 ];
 
@@ -150,13 +151,15 @@ function CapabilityCard({ cap, index, total, progress }: { cap: any, index: numb
       className="absolute inset-0 w-full h-screen flex items-center justify-center bg-black"
     >
       <div className="relative w-full h-full">
-        <Image 
-          src={cap.image} 
-          alt={cap.title} 
-          fill 
-          className="object-cover grayscale opacity-50"
-          data-ai-hint={cap.hint}
-        />
+        {cap.image && (
+          <Image 
+            src={cap.image} 
+            alt={cap.title} 
+            fill 
+            className="object-cover grayscale opacity-50"
+            data-ai-hint={cap.hint}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
         
         <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
@@ -169,7 +172,7 @@ function CapabilityCard({ cap, index, total, progress }: { cap: any, index: numb
             <span className="text-primary font-bold text-[10px] md:text-xs uppercase tracking-[1em] block mb-4">Capability {index + 1}</span>
             <h2 className="text-6xl md:text-[10vw] font-headline font-bold text-white uppercase tracking-tighter leading-none">
               {cap.title.split(' ')[0]} <br />
-              <span className="text-primary stroke-text">{cap.title.split(' ')[1]}</span>
+              <span className="text-primary stroke-text">{cap.title.split(' ').slice(1).join(' ')}</span>
             </h2>
             <p className="text-[10px] md:text-xs text-white/40 font-black uppercase tracking-[0.5em] max-w-xl mx-auto leading-relaxed pt-8">
               {cap.desc}

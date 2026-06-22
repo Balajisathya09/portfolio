@@ -17,6 +17,24 @@
       "description": "Abstract tech visual",
       "imageUrl": "https://picsum.photos/seed/67/800/600",
       "imageHint": "abstract tech"
+    },
+    {
+      "id": "capability-web",
+      "description": "Coding environment setup",
+      "imageUrl": "https://picsum.photos/seed/web-dev-coding/1920/1080",
+      "imageHint": "coding laptop"
+    },
+    {
+      "id": "capability-uiux",
+      "description": "UI/UX design workspace",
+      "imageUrl": "https://picsum.photos/seed/ui-ux-design-workspace/1920/1080",
+      "imageHint": "design interface"
+    },
+    {
+      "id": "capability-video",
+      "description": "Video editing software interface",
+      "imageUrl": "https://picsum.photos/seed/video-editing-timeline/1920/1080",
+      "imageHint": "video timeline"
     }
   ]
 }
