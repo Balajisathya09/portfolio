@@ -63,8 +63,8 @@ export default function AboutPage() {
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
             className="space-y-8"
           >
             <span className="text-primary font-bold text-xs uppercase tracking-[0.5em] block">About Me</span>
@@ -78,8 +78,8 @@ export default function AboutPage() {
 
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 group"
           >
             <img 
@@ -94,22 +94,27 @@ export default function AboutPage() {
         {/* Abilities Section */}
         <section className="mb-40">
           <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20 border-b border-white/5 pb-10">
-            <div>
+            <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+            >
               <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block">My Abilities</span>
               <h2 className="text-4xl font-headline font-bold text-white uppercase tracking-tighter">My Skills</h2>
-            </div>
+            </motion.div>
             <p className="text-white/40 uppercase text-xs font-bold tracking-widest max-w-xs text-right">
               I've worked with a variety of technologies in the web development world. Here are the technologies I'm most proficient in.
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {SKILLS.map((skill) => (
+            {SKILLS.map((skill, idx) => (
               <motion.div 
                 key={skill.name}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
                 whileHover={{ y: -5 }}
                 className="bg-white/5 border border-white/10 p-8 rounded-2xl flex items-center justify-center text-center group hover:border-primary/50 transition-all duration-300 backdrop-blur-sm"
               >
@@ -125,40 +130,63 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 mb-40">
           {/* Education */}
           <section>
-            <div className="flex items-center gap-4 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-4 mb-12"
+            >
               <GraduationCap className="w-6 h-6 text-primary" />
               <div>
                 <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">My Journey</span>
                 <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Education</h2>
               </div>
-            </div>
+            </motion.div>
             <p className="text-xs text-white/30 uppercase tracking-widest mb-12">My academic background and educational qualifications.</p>
             <div className="space-y-12">
               {EDUCATION.map((edu, idx) => (
-                <div key={idx} className="relative pl-10 border-l border-white/5">
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="relative pl-10 border-l border-white/5"
+                >
                   <div className="absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(255,215,0,0.5)]" />
                   <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-2 block">{edu.year}</span>
                   <h3 className="text-xl font-bold text-white mb-2">{edu.degree}</h3>
                   <p className="text-sm text-white/40 mb-4 font-medium uppercase tracking-wider">{edu.school}</p>
                   <p className="text-xs text-white/30 leading-relaxed mb-4">{edu.description}</p>
                   <span className="px-3 py-1 bg-white/5 rounded-full text-[10px] text-primary/60 font-bold border border-white/10 uppercase tracking-widest">Score: {edu.score}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </section>
 
           {/* Internship */}
           <section>
-            <div className="flex items-center gap-4 mb-12">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-4 mb-12"
+            >
               <Briefcase className="w-6 h-6 text-primary" />
               <div>
                 <span className="text-primary font-bold text-[10px] uppercase tracking-[0.4em] block">Professional Growth</span>
                 <h2 className="text-3xl font-headline font-bold text-white uppercase tracking-tighter">Internship Experience</h2>
               </div>
-            </div>
+            </motion.div>
             <p className="text-xs text-white/30 uppercase tracking-widest mb-12">My hands-on experience and learning during internships.</p>
             {EXPERIENCE.map((exp, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 p-10 rounded-3xl relative overflow-hidden group">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="bg-white/5 border border-white/10 p-10 rounded-3xl relative overflow-hidden group"
+              >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
                 <span className="text-[10px] font-black text-primary uppercase tracking-widest mb-4 block">Internship | {exp.year}</span>
                 <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
@@ -180,14 +208,19 @@ export default function AboutPage() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </section>
         </div>
 
         {/* Strengths & Languages */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-40">
-          <section className="bg-white/5 border border-white/10 p-12 rounded-3xl">
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 border border-white/10 p-12 rounded-3xl"
+          >
             <div className="flex items-center gap-4 mb-10">
               <Target className="w-6 h-6 text-primary" />
               <div>
@@ -209,9 +242,14 @@ export default function AboutPage() {
                 desc="Quick learner with ability to adapt to new technologies and frameworks efficiently for project development and team collaboration."
               />
             </div>
-          </section>
+          </motion.section>
 
-          <section className="bg-white/5 border border-white/10 p-12 rounded-3xl">
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/5 border border-white/10 p-12 rounded-3xl"
+          >
             <div className="flex items-center gap-4 mb-10">
               <Languages className="w-6 h-6 text-primary" />
               <div>
@@ -228,7 +266,7 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </motion.section>
         </div>
       </div>
     </div>

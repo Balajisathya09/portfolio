@@ -1,6 +1,10 @@
+
+"use client";
+
 import NarrativeScroll from "@/components/NarrativeScroll";
 import { ArrowRight, Download, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -9,25 +13,39 @@ export default function Home() {
       <section className="min-h-screen flex flex-col justify-center px-12 relative overflow-hidden">
         {/* Minimalist Background System */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Subtle Atmospheric Glows */}
           <div className="absolute top-1/4 -left-1/4 w-[60vw] h-[60vw] bg-primary/5 rounded-full blur-[150px] opacity-50" />
           <div className="absolute bottom-1/4 -right-1/4 w-[50vw] h-[50vw] bg-white/5 rounded-full blur-[120px] opacity-30" />
         </div>
 
         <div className="max-w-screen-2xl mx-auto w-full flex flex-col items-center justify-center text-center pt-32 z-10 relative">
-          <div className="flex items-center gap-6 mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="flex items-center gap-6 mb-12"
+          >
             <div className="h-[1px] w-12 bg-primary/30" />
             <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary">Creative Engineering</span>
             <div className="h-[1px] w-12 bg-primary/30" />
-          </div>
+          </motion.div>
           
-          <h1 className="text-[10vw] md:text-[9vw] font-headline font-bold leading-[0.82] tracking-tighter uppercase text-white mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-[10vw] md:text-[9vw] font-headline font-bold leading-[0.82] tracking-tighter uppercase text-white mb-16"
+          >
             BALAJI <br />
             <span className="stroke-text italic block mt-2">MANIFESTING</span>
             <span className="text-primary">PURITY.</span>
-          </h1>
+          </motion.h1>
 
-          <div className="max-w-2xl space-y-16 flex flex-col items-center animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="max-w-2xl space-y-16 flex flex-col items-center"
+          >
             <p className="text-[11px] md:text-xs text-white/40 font-light leading-loose tracking-[0.4em] uppercase max-w-lg">
               Architecting <span className="text-white">cinematic digital realms</span> through code and interaction. Based in the intersection of visual precision and technical excellence.
             </p>
@@ -42,7 +60,7 @@ export default function Home() {
                 <Download className="w-4 h-4 group-hover:translate-y-2 transition-transform" />
               </button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Technical Metadata Decoration */}
           <div className="absolute bottom-[-10vh] left-0 right-0 flex justify-between items-end px-4 hidden xl:flex">
@@ -70,17 +88,26 @@ export default function Home() {
       <section className="px-12 py-60 relative overflow-hidden bg-black/50">
         <div className="max-w-screen-2xl mx-auto">
           <div className="flex justify-between items-end mb-32 border-b border-white/5 pb-20">
-            <div>
+            <motion.div
+               initial={{ opacity: 0, x: -20 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+            >
               <span className="text-[11px] font-black uppercase tracking-[0.8em] text-primary mb-6 block">Selected Study</span>
               <h2 className="text-5xl md:text-7xl font-headline font-bold uppercase tracking-tighter text-white">Vortex Engine</h2>
-            </div>
+            </motion.div>
             <Link href="/projects" className="text-[10px] font-black uppercase tracking-[0.4em] hover:text-primary text-white/30 transition-colors flex items-center gap-4 mb-4">
               View Archive <ArrowUpRight className="w-4 h-4 text-primary" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-40 items-center">
-            <div className="relative aspect-video rounded-sm overflow-hidden border border-white/5 bg-card grayscale hover:grayscale-0 transition-all duration-1000 group">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-video rounded-sm overflow-hidden border border-white/5 bg-card grayscale hover:grayscale-0 transition-all duration-1000 group"
+            >
               <img 
                 src="https://picsum.photos/seed/vortex-gold/1200/800"
                 alt="Vortex Engine"
@@ -90,8 +117,13 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-20">
                 <span className="text-[11px] font-black uppercase tracking-[0.6em] text-primary">Core Phase: Interaction</span>
               </div>
-            </div>
-            <div className="space-y-16">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-16"
+            >
               <h3 className="text-2xl font-headline font-bold uppercase tracking-[0.3em] text-white/90">Macro Precision.</h3>
               <p className="text-xs text-white/30 font-light leading-loose max-w-sm tracking-[0.2em] uppercase">
                 An exploration into high-fidelity real-time shaders and procedural geometry. This module focuses on the marriage of synthetic light and organic motion.
@@ -103,24 +135,10 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="px-12 py-32 border-t border-white/5 bg-black">
-        <div className="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
-          <div className="text-[10px] font-black uppercase tracking-[0.8em] text-white/20">
-            © 2025 <span className="text-primary/40">BALAJI</span> STUDIO
-          </div>
-          <div className="flex gap-20">
-            {["GitHub", "LinkedIn", "Instagram"].map(s => (
-              <a key={s} href="#" className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 hover:text-primary transition-colors">{s}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -4,10 +4,39 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Phone, Mail, MapPin, Loader2, Calendar, CheckCircle2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import * as Tone from "tone";
+
+const contactSchema = z.object({
+  name: z.string()
+    .min(1, "Name is required")
+    .regex(/^[a-zA-Z\s]+$/, "Name must contain only alphabets"),
+  email: z.string()
+    .min(1, "Email is required")
+    .email("Invalid email address"),
+  phone: z.string()
+    .min(1, "Phone number is required")
+    .regex(/^[0-9]+$/, "Phone must contain only numbers"),
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
 
   const playHoverSound = () => {
     const synth = new Tone.Synth({
@@ -25,11 +54,16 @@ export default function ContactPage() {
     synth.triggerAttackRelease("G4", "16n");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = (data: ContactFormData) => {
     playClickSound();
     setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 2000);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSuccess(true);
+      reset();
+      setTimeout(() => setSuccess(false), 5000);
+    }, 2000);
   };
 
   return (
@@ -39,6 +73,7 @@ export default function ContactPage() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
           >
             <span className="text-primary font-bold text-xs uppercase tracking-[0.5em] mb-4 block">Get In Touch</span>
             <h1 className="text-6xl md:text-8xl font-headline font-bold uppercase text-white mb-10 tracking-tighter leading-none">
@@ -73,52 +108,68 @@ export default function ContactPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-card border border-white/5 p-12 rounded-[2.5rem] backdrop-blur-xl shadow-2xl relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-60 h-60 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
               
-              <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Name</label>
                     <input 
+                      {...register("name")}
                       onMouseEnter={playHoverSound}
-                      required 
-                      className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                      className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
                       placeholder="Your Name"
                     />
+                    {errors.name && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.name.message}</p>}
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Email</label>
                     <input 
+                      {...register("email")}
                       onMouseEnter={playHoverSound}
                       type="email" 
-                      required 
-                      className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                      className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
                       placeholder="email@example.com"
                     />
+                    {errors.email && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.email.message}</p>}
                   </div>
                 </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Phone Number</label>
+                  <input 
+                    {...register("phone")}
+                    onMouseEnter={playHoverSound}
+                    className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
+                    placeholder="+91 8754544636"
+                  />
+                  {errors.phone && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.phone.message}</p>}
+                </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Subject</label>
                   <input 
+                    {...register("subject")}
                     onMouseEnter={playHoverSound}
-                    required 
-                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10" 
+                    className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
                     placeholder="Project Inquiry"
                   />
+                  {errors.subject && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.subject.message}</p>}
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Message</label>
                   <textarea 
+                    {...register("message")}
                     onMouseEnter={playHoverSound}
-                    required 
                     rows={4} 
-                    className="w-full bg-white/5 border border-white/10 p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/10" 
+                    className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/10 text-xs tracking-widest uppercase`} 
                     placeholder="Tell me about your project..."
                   />
+                  {errors.message && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.message.message}</p>}
                 </div>
 
                 <button 
@@ -127,6 +178,11 @@ export default function ContactPage() {
                 >
                   {isSubmitting ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : success ? (
+                    <>
+                      Message Sent!
+                      <CheckCircle2 className="w-4 h-4" />
+                    </>
                   ) : (
                     <>
                       Send Message 
@@ -137,11 +193,10 @@ export default function ContactPage() {
               </form>
             </motion.div>
 
-            {/* Availability Box moved below the form */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.5 }}
               className="p-10 border border-primary/10 bg-primary/5 rounded-[2rem] flex flex-col gap-6"
             >
               <div className="flex items-center gap-4 text-primary">
