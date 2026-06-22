@@ -13,7 +13,7 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="px-12 py-12 border-t border-white/5 bg-black/20 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto flex justify-center items-center">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-8">
         <div className="flex gap-12">
           {SOCIAL_LINKS.map((link, idx) => (
             <motion.a
@@ -30,6 +30,13 @@ export default function Footer() {
             </motion.a>
           ))}
         </div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20"
+        >
+          copyrights@balaji.s 2026
+        </motion.div>
       </div>
     </footer>
   );
