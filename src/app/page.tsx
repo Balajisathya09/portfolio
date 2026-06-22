@@ -5,6 +5,7 @@ import NarrativeScroll from "@/components/NarrativeScroll";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -65,7 +66,7 @@ export default function Home() {
           <div className="absolute bottom-[-10vh] left-0 right-0 flex justify-between items-end px-4 hidden xl:flex">
             <div className="flex flex-col gap-2 opacity-10">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">V.2025 // STABLE</span>
-              <span className="text-[8px] font-black tracking-widest text-white uppercase">LAT: 13.1070° N, 80.2372° E</span>
+              <span className="text-[8px] font-black tracking-widest text-white uppercase">LAT: 13.0827° N, 80.2707° E</span>
             </div>
             <div className="flex flex-col gap-2 opacity-10 items-end">
               <span className="text-[8px] font-black tracking-widest text-white uppercase">INTERACTION PHASE: 01</span>
@@ -81,6 +82,101 @@ export default function Home() {
           className="text-xl md:text-2xl font-headline font-light uppercase tracking-[0.2em] leading-[1.8] text-center text-white px-12"
           text="WE ARE NOT JUST BUILDING INTERFACES. WE ARE CRAFTING NARRATIVES IN THE DIGITAL VOID. PRECISION IS OUR ONLY RELIGION. EVERY PIXEL IS A CHOICE."
         />
+      </section>
+
+      {/* Capabilities & Highlights Section */}
+      <section className="py-60 px-12 bg-black border-t border-white/5">
+        <div className="max-w-7xl mx-auto space-y-60">
+          
+          {/* What I Do */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
+            >
+              <Image 
+                src="https://picsum.photos/seed/what-i-do/1200/800" 
+                alt="Capabilities" 
+                fill 
+                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                data-ai-hint="minimal workspace"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-12"
+            >
+              <div>
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">My Capability</span>
+                <h2 className="text-5xl md:text-7xl font-headline font-bold text-white uppercase tracking-tighter leading-none">
+                  WHAT I <br /><span className="text-primary">DO.</span>
+                </h2>
+              </div>
+              <div className="space-y-4">
+                <p className="text-xs md:text-sm text-white font-bold uppercase tracking-[0.4em] leading-relaxed">
+                  I ARCHITECT HIGH-PERFORMANCE WEB APPLICATIONS.
+                </p>
+                <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.4em] leading-relaxed">
+                  I DESIGN CINEMATIC USER EXPERIENCES IN FIGMA.
+                </p>
+                <p className="text-xs md:text-sm text-white/20 uppercase tracking-[0.4em] leading-relaxed">
+                  I ENGINEER SCALABLE SYSTEMS WITH MODERN TOOLS.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* What I've Done */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-2 lg:order-1 space-y-12"
+            >
+              <div className="text-right lg:text-left">
+                <span className="text-primary font-bold text-[10px] uppercase tracking-[0.6em] mb-4 block underline underline-offset-8 decoration-primary/30">Achievements</span>
+                <h2 className="text-5xl md:text-7xl font-headline font-bold text-white uppercase tracking-tighter leading-none">
+                  WHAT I'VE <br /><span className="text-primary">DONE.</span>
+                </h2>
+              </div>
+              <div className="space-y-4 text-right lg:text-left">
+                <p className="text-xs md:text-sm text-white font-bold uppercase tracking-[0.4em] leading-relaxed">
+                  I'VE DEPLOYED SEAMLESS HOTEL MANAGEMENT SYSTEMS.
+                </p>
+                <p className="text-xs md:text-sm text-white/40 uppercase tracking-[0.4em] leading-relaxed">
+                  I'VE ARCHITECTED MODERN FITNESS WEB PLATFORMS.
+                </p>
+                <p className="text-xs md:text-sm text-white/20 uppercase tracking-[0.4em] leading-relaxed">
+                  I'VE PROTOTYPED GLOBAL ENTERTAINMENT UI/UX FLOWS.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2 relative aspect-video rounded-3xl overflow-hidden border border-white/10 group"
+            >
+              <Image 
+                src="https://picsum.photos/seed/what-i-done/1200/800" 
+                alt="Achievements" 
+                fill 
+                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                data-ai-hint="abstract technology"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent" />
+            </motion.div>
+          </div>
+
+        </div>
       </section>
     </div>
   );
