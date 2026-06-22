@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { BookOpen, Briefcase, Code, GraduationCap, Languages, Target } from "lucide-react";
 
 const SKILLS = [
-  { name: "UI/UX Design", level: 90 },
-  { name: "HTML", level: 80 },
-  { name: "CSS3", level: 80 },
-  { name: "JavaScript", level: 70 },
-  { name: "AWS Cloud (basics)", level: 70 },
-  { name: "MS Excel", level: 80 },
-  { name: "Java (basics)", level: 60 },
-  { name: "Python (basics)", level: 60 },
+  { name: "UI/UX Design" },
+  { name: "HTML" },
+  { name: "CSS3" },
+  { name: "JavaScript" },
+  { name: "AWS Cloud (basics)" },
+  { name: "MS Excel" },
+  { name: "Java (basics)" },
+  { name: "Python (basics)" },
 ];
 
 const EDUCATION = [
@@ -103,23 +103,20 @@ export default function AboutPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {SKILLS.map((skill) => (
-              <div key={skill.name} className="space-y-4 group">
-                <div className="flex justify-between items-end">
-                  <span className="text-sm font-bold uppercase tracking-widest text-white/60 group-hover:text-primary transition-colors">{skill.name}</span>
-                  <span className="text-xs font-mono text-primary/50">{skill.level}%</span>
-                </div>
-                <div className="h-[2px] w-full bg-white/5 overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, ease: "circOut" }}
-                    className="h-full bg-primary"
-                  />
-                </div>
-              </div>
+              <motion.div 
+                key={skill.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                className="bg-white/5 border border-white/10 p-8 rounded-2xl flex items-center justify-center text-center group hover:border-primary/50 transition-all duration-300 backdrop-blur-sm"
+              >
+                <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-white/60 group-hover:text-primary transition-colors">
+                  {skill.name}
+                </span>
+              </motion.div>
             ))}
           </div>
         </section>
