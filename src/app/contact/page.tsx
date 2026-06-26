@@ -88,7 +88,7 @@ export default function ContactPage() {
             
             <div className="space-y-10">
               <ContactInfo 
-                icon={<Phone className="w-5 h-5 text-primary" />} 
+                icon={<Mail className="w-5 h-5 text-primary" />} 
                 label="Email" 
                 value="balajisathyanarayanan09062004@gmail.com" 
                 action="Send Message"
