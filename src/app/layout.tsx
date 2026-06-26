@@ -4,8 +4,8 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: "Balaji S | MCA Graduate | Web Developer | UI/UX Designer",
-  description: "Official portfolio of Balaji S. MCA Graduate, Web Developer, UI/UX Designer, and Video Editor. Explore projects, skills, and contact information.",
+  title: "Balaji S | Web Developer & UI/UX Designer",
+  description: "Official portfolio of Balaji S showcasing web development, UI/UX design, and creative projects.",
   keywords: [
     "Balaji S",
     "Balaji Portfolio",
