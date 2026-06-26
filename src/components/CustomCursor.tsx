@@ -9,9 +9,6 @@ export default function CustomCursor() {
   const mouseY = useMotionValue(0);
 
   const springConfig = { damping: 25, stiffness: 250, mass: 0.5 };
-  const cursorX = useSpring(mouseX, springConfig);
-  const cursorY = useSpring(mouseY, springConfig);
-
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
@@ -33,31 +30,20 @@ export default function CustomCursor() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
-      {/* Precision Dot - No Glow/Aura */}
       <motion.div
-        className="absolute top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full"
+        className="absolute top-0 left-0 mix-blend-difference"
         style={{
           x: mouseX,
           y: mouseY,
           translateX: "-50%",
           translateY: "-50%",
         }}
-      />
-      
-      {/* Follower Ring */}
-      <motion.div
-        className="absolute top-0 left-0 w-10 h-10 border border-primary/30 rounded-full"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          scale: isPointer ? 1.4 : 1,
-          borderColor: isPointer ? "rgba(255, 215, 0, 0.8)" : "rgba(255, 215, 0, 0.3)",
-        }}
-      />
+      >
+        <div className="relative flex items-center justify-center w-8 h-8 opacity-90">
+          <div className="absolute w-full h-[1px] bg-white" />
+          <div className="absolute h-full w-[1px] bg-white" />
+        </div>
+      </motion.div>
     </div>
   );
 }

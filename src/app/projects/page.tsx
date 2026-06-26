@@ -1,5 +1,4 @@
 import BentoGrid from "@/components/BentoGrid";
-import ProjectLoreTool from "@/components/ProjectLoreTool";
 
 export default function ProjectsPage() {
   return (
@@ -21,25 +20,6 @@ export default function ProjectsPage() {
 
         <BentoGrid />
 
-        <div className="mt-60 grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-headline font-bold text-white mb-8 uppercase tracking-tighter leading-none">
-              MANIFESTING <br /><span className="text-primary">THE LORE.</span>
-            </h2>
-            <p className="text-xs text-white/40 mb-12 uppercase tracking-widest leading-loose max-w-md">
-              Proprietary AI engines crafted to manifest cinematic technical narratives from raw code. Our models don't just document; they weave technical legends.
-            </p>
-            <ul className="space-y-6">
-              {["Technical Storytelling", "Automated Documentation", "Portfolio Enhancement"].map((feature) => (
-                <li key={feature} className="flex items-center gap-4 text-primary font-black uppercase text-[10px] tracking-[0.3em]">
-                  <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_15px_rgba(255,215,0,0.8)]" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <ProjectLoreTool />
-        </div>
       </div>
     </div>
   );

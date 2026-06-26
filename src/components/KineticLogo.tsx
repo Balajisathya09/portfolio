@@ -1,27 +1,20 @@
 
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import profileImg from "../../asset/profile.jpg";
 
 export default function KineticLogo() {
   return (
     <div className="relative flex items-center justify-center group cursor-default">
-      {/* Static Logo Circle */}
-      <div className="relative w-12 h-12 bg-black border border-white/10 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
-        
-        {/* Stylized 'N' SVG */}
-        <svg 
-          viewBox="0 0 100 100" 
-          className="w-6 h-6 text-primary"
-          fill="none" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            d="M20 80V20L50 55V20H80V80L50 45V80H20Z" 
-            fill="currentColor" 
-          />
-        </svg>
+      {/* Profile Photo Circle */}
+      <div className="relative w-12 h-12 rounded-full overflow-hidden border border-primary/40 shadow-2xl">
+        <Image
+          src={profileImg}
+          alt="Balaji"
+          fill
+          className="object-cover object-top"
+        />
       </div>
 
       {/* Yellow Branding Name */}

@@ -3,8 +3,8 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Target, Languages } from "lucide-react";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import Image from "next/image";
+import profileImg from "../../../asset/profile.jpg";
 
 const SKILLS = [
   { name: "UI/UX Design" },
@@ -32,6 +32,20 @@ const EDUCATION = [
     description: "Bachelor of Commerce with Computer Application specialization.",
     score: "73%",
   },
+  {
+    year: "2020 - 2021",
+    degree: "Higher Secondary Certificate (HSC)",
+    school: "[Your School Name]",
+    description: "Completed 12th standard education.",
+    score: "[Your %]",
+  },
+  {
+    year: "2018 - 2019",
+    degree: "Secondary School Certificate (SSC)",
+    school: "[Your School Name]",
+    description: "Completed 10th standard education.",
+    score: "[Your %]",
+  },
 ];
 
 const EXPERIENCE = [
@@ -49,7 +63,6 @@ const EXPERIENCE = [
 ];
 
 export default function AboutPage() {
-  const profileImage = PlaceHolderImages.find(img => img.id === 'profile');
 
   return (
     <div className="pt-32 pb-20 px-8">
@@ -75,18 +88,15 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 bg-card"
+            className="relative rounded-3xl overflow-hidden border border-white/10 bg-card"
+            style={{ height: '620px' }}
           >
-            {profileImage && (
-              <Image 
-                src={profileImage.imageUrl} 
-                alt="Balaji Profile" 
-                fill
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                data-ai-hint={profileImage.imageHint}
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+            <Image 
+              src={profileImg} 
+              alt="Balaji Profile" 
+              fill
+              className="w-full h-full object-cover object-top"
+            />
           </motion.div>
         </section>
 

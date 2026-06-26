@@ -3,22 +3,22 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, Loader2, Calendar, CheckCircle2 } from "lucide-react";
+import { Send, Phone, Mail, MapPin, Loader2, Calendar, CheckCircle2, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import * as Tone from "tone";
+import emailjs from "@emailjs/browser";
 
 const contactSchema = z.object({
   name: z.string()
     .min(1, "Name is required")
-    .regex(/^[a-zA-Z\s]+$/, "Name must contain only alphabets"),
+    .regex(/^[a-zA-Z\s.]+$/, "Name must contain only alphabets, space and dot"),
   email: z.string()
     .min(1, "Email is required")
-    .email("Invalid email address"),
+    .email("Invalid email address (must contain @)"),
   phone: z.string()
     .min(1, "Phone number is required")
-    .regex(/^[0-9]+$/, "Phone must contain only numbers"),
+    .regex(/^[0-9]{10}$/, "Phone must contain exactly 10 digits"),
   subject: z.string().min(1, "Subject is required"),
   message: z.string().min(1, "Message is required"),
 });
@@ -28,6 +28,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const {
     register,
@@ -38,32 +39,34 @@ export default function ContactPage() {
     resolver: zodResolver(contactSchema),
   });
 
-  const playHoverSound = () => {
-    const synth = new Tone.Synth({
-      oscillator: { type: "sine" },
-      envelope: { attack: 0.001, decay: 0.1, sustain: 0.1, release: 1 }
-    }).toDestination();
-    synth.triggerAttackRelease("C5", "8n", undefined, 0.1);
-  };
+  const playHoverSound = () => {};
 
-  const playClickSound = () => {
-    const synth = new Tone.Synth({
-      oscillator: { type: "square" },
-      envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.1 }
-    }).toDestination();
-    synth.triggerAttackRelease("G4", "16n");
-  };
-
-  const onSubmit = (data: ContactFormData) => {
-    playClickSound();
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setError(false);
+    try {
+      await emailjs.send(
+        "service_dwexfnq",
+        "template_qhx6l2e",
+        {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone,
+          subject: data.subject,
+          message: data.message,
+          to_email: "balajisathyanarayanan09062004@gmail.com",
+        },
+        "MfED-K0KhxnnFuxZr"
+      );
       setSuccess(true);
       reset();
-      setTimeout(() => setSuccess(false), 5000);
-    }, 2000);
+      setTimeout(() => setSuccess(false), 6000);
+    } catch (err) {
+      setError(true);
+      setTimeout(() => setError(false), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -89,12 +92,14 @@ export default function ContactPage() {
                 label="Email" 
                 value="balajisathyanarayanan09062004@gmail.com" 
                 action="Send Message"
+                href="mailto:balajisathyanarayanan09062004@gmail.com"
               />
               <ContactInfo 
                 icon={<Phone className="w-5 h-5 text-primary" />} 
                 label="Phone" 
                 value="+91 8754544636" 
                 action="Call Now"
+                href="tel:+918754544636"
               />
               <ContactInfo 
                 icon={<MapPin className="w-5 h-5 text-primary" />} 
@@ -114,24 +119,37 @@ export default function ContactPage() {
               <div className="absolute top-0 right-0 w-60 h-60 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
               
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative z-10">
+                {success && (
+                  <div className="bg-green-500/10 border border-green-500/50 text-green-400 p-4 rounded-xl flex items-center justify-center gap-2 mb-6">
+                    <CheckCircle2 className="w-5 h-5" />
+                    <span className="text-sm font-bold tracking-widest uppercase">Message sent successfully!</span>
+                  </div>
+                )}
+                {error && (
+                  <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-4 rounded-xl flex items-center justify-center gap-2 mb-6">
+                    <XCircle className="w-5 h-5" />
+                    <span className="text-sm font-bold tracking-widest uppercase">Failed to send. Please try again!</span>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Name</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Name</label>
                     <input 
                       {...register("name")}
                       onMouseEnter={playHoverSound}
-                      className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
+                      className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                       placeholder="Your Name"
                     />
                     {errors.name && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.name.message}</p>}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Email</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Email</label>
                     <input 
                       {...register("email")}
                       onMouseEnter={playHoverSound}
                       type="email" 
-                      className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
+                      className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                       placeholder="email@example.com"
                     />
                     {errors.email && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.email.message}</p>}
@@ -139,34 +157,35 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Phone Number</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Phone Number</label>
                   <input 
                     {...register("phone")}
                     onMouseEnter={playHoverSound}
-                    className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
-                    placeholder="+91 8754544636"
+                    className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
+                    placeholder="9876543210"
+                    maxLength={10}
                   />
                   {errors.phone && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.phone.message}</p>}
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Subject</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Subject</label>
                   <input 
                     {...register("subject")}
                     onMouseEnter={playHoverSound}
-                    className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/10 text-xs tracking-widest uppercase`} 
+                    className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                     placeholder="Project Inquiry"
                   />
                   {errors.subject && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.subject.message}</p>}
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Message</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-white/50">Message</label>
                   <textarea 
                     {...register("message")}
                     onMouseEnter={playHoverSound}
                     rows={4} 
-                    className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/10'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/10 text-xs tracking-widest uppercase`} 
+                    className={`w-full bg-white/5 border ${errors.message ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl resize-none placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                     placeholder="Tell me about your project..."
                   />
                   {errors.message && <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest">{errors.message.message}</p>}
@@ -219,9 +238,9 @@ export default function ContactPage() {
   );
 }
 
-function ContactInfo({ icon, label, value, action }: { icon: React.ReactNode, label: string, value: string, action?: string }) {
-  return (
-    <div className="flex items-center gap-8 group cursor-pointer">
+function ContactInfo({ icon, label, value, action, href }: { icon: React.ReactNode, label: string, value: string, action?: string, href?: string }) {
+  const Content = (
+    <>
       <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/40 transition-all duration-500 shadow-lg">
         {icon}
       </div>
@@ -234,6 +253,16 @@ function ContactInfo({ icon, label, value, action }: { icon: React.ReactNode, la
           </span>
         )}
       </div>
+    </>
+  );
+
+  return href ? (
+    <a href={href} className="flex items-center gap-8 group cursor-pointer">
+      {Content}
+    </a>
+  ) : (
+    <div className="flex items-center gap-8 group cursor-pointer">
+      {Content}
     </div>
   );
 }

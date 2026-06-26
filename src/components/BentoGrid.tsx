@@ -6,11 +6,13 @@ import { ArrowUpRight, Github, ExternalLink, Code2 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
+import { StaticImageData } from "next/image";
+
 interface Project {
   title: string;
   category: string;
   description: string;
-  image: string;
+  image: string | StaticImageData;
   technologies: string[];
   links: {
     view?: string;
@@ -19,38 +21,42 @@ interface Project {
   };
 }
 
+import gymImg from "../../asset/gym.jpg";
+import hotelImg from "../../asset/hotel.jpg";
+import movieImg from "../../asset/movie.png";
+
 const PROJECTS: Project[] = [
   {
     title: "GYM Website",
     category: "Web Development",
     description: "Modern fitness website with workout routines, trainer profiles, and membership management.",
-    image: "https://picsum.photos/seed/gym-web/800/600",
+    image: gymImg,
     technologies: ["HTML5", "CSS3", "JavaScript"],
     links: {
-      view: "#",
-      source: "#"
+      view: "/projects/gym-website",
+      source: "https://github.com/Balajisathya09/GYM-website.git"
     }
   },
   {
     title: "Flask Hotel Project",
     category: "Web Development",
     description: "Hotel booking and management system built with Flask framework for seamless operations.",
-    image: "https://picsum.photos/seed/hotel-flask/800/600",
+    image: hotelImg,
     technologies: ["Python", "Flask", "HTML", "CSS"],
     links: {
-      view: "#",
-      source: "#"
+      view: "/projects/flask-hotel",
+      source: "https://github.com/Balajisathya09/flask-hotal.git"
     }
   },
   {
     title: "BookMyShow(Clone)",
     category: "UI/UX Design",
     description: "Entertainment booking platform UI/UX design prototype focused on user research and experience.",
-    image: "https://picsum.photos/seed/bms-clone/800/600",
+    image: movieImg,
     technologies: ["Figma", "UI/UX Design", "Prototyping", "User Research", "Wireframe"],
     links: {
-      view: "#",
-      prototype: "#"
+      view: "/projects/bookmyshow-clone",
+      prototype: "https://www.figma.com/proto/c4mB8DLRCOUC4wARmGzd5D/Untitled?node-id=74-95&t=m9UgAOEqlpYjAif3-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=74%3A95&show-proto-sidebar=1"
     }
   }
 ];
@@ -106,17 +112,17 @@ export default function BentoGrid() {
 
             <div className="mt-auto pt-8 border-t border-white/5 flex flex-wrap gap-4">
               {project.links.view && (
-                <a href={project.links.view} className="flex-1 flex items-center justify-center gap-2 bg-primary text-black px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-primary/10">
+                <a href={project.links.view} className="flex-1 flex items-center justify-center gap-2 bg-primary text-black px-4 h-12 rounded-xl text-[9px] whitespace-nowrap font-black uppercase tracking-widest hover:scale-105 transition-all shadow-lg shadow-primary/10">
                   View Project <ExternalLink className="w-3 h-3" />
                 </a>
               )}
               {project.links.source && (
-                <a href={project.links.source} className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white/60 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:text-white hover:border-primary/30 transition-all">
+                <a href={project.links.source} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white/60 px-4 h-12 rounded-xl text-[9px] whitespace-nowrap font-black uppercase tracking-widest hover:text-white hover:border-primary/30 transition-all">
                   Source Code <Github className="w-3 h-3" />
                 </a>
               )}
               {project.links.prototype && (
-                <a href={project.links.prototype} className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white/60 px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:text-white hover:border-primary/30 transition-all">
+                <a href={project.links.prototype} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white/60 px-4 h-12 rounded-xl text-[9px] whitespace-nowrap font-black uppercase tracking-widest hover:text-white hover:border-primary/30 transition-all">
                   View Prototype <Code2 className="w-3 h-3" />
                 </a>
               )}
