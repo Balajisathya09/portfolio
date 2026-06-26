@@ -88,7 +88,7 @@ export default function ContactPage() {
             
             <div className="space-y-10">
               <ContactInfo 
-                icon={<Mail className="w-5 h-5 text-primary" />} 
+                icon={<Phone className="w-5 h-5 text-primary" />} 
                 label="Email" 
                 value="balajisathyanarayanan09062004@gmail.com" 
                 action="Send Message"
@@ -106,25 +106,6 @@ export default function ContactPage() {
                 label="Location" 
                 value="Perambur, Chennai" 
               />
-            </div>
-
-            <div className="flex items-center gap-6 pt-8">
-              <a 
-                href="https://github.com/Balajisathya09" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/10 hover:border-primary/40 transition-all duration-500 shadow-lg group"
-              >
-                <Github className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
-              </a>
-              <a 
-                href="https://www.linkedin.com/in/balaji-sathyanarayanan-2b4a5728b/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/10 hover:border-primary/40 transition-all duration-500 shadow-lg group"
-              >
-                <Linkedin className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
-              </a>
             </div>
           </motion.div>
 
@@ -270,7 +251,7 @@ function ContactInfo({ icon, label, value, action, href }: { icon: React.ReactNo
       </div>
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-1">{label}</p>
-        <p className="text-lg text-white font-bold group-hover:text-primary transition-colors">{value}</p>
+        <p className="text-lg text-white font-bold group-hover:text-primary transition-colors break-all">{value}</p>
         {action && (
           <span className="text-[9px] font-black uppercase tracking-widest text-primary/40 mt-1 block group-hover:text-primary transition-colors">
             {action}
