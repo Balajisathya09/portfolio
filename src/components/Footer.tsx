@@ -16,8 +16,8 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 const SOCIAL_LINKS = [
-  { icon: <Linkedin className="w-5 h-5" />, href: "#", label: "LinkedIn", hoverColor: "#0A66C2" },
-  { icon: <Github className="w-5 h-5" />, href: "#", label: "GitHub", hoverColor: "#ffffff" },
+  { icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/balaji-sathyanarayanan-2b4a5728b/", label: "LinkedIn", hoverColor: "#0A66C2" },
+  { icon: <Github className="w-5 h-5" />, href: "https://github.com/Balajisathya09", label: "GitHub", hoverColor: "#ffffff" },
   { icon: <WhatsAppIcon className="w-5 h-5" />, href: "https://wa.me/918754544636", label: "WhatsApp", hoverColor: "#25D366" },
 ];
 
