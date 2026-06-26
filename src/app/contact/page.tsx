@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Phone, Mail, MapPin, Loader2, Calendar, CheckCircle2, XCircle } from "lucide-react";
+import { Send, Phone, Mail, MapPin, Loader2, Calendar, CheckCircle2, XCircle, Github, Linkedin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -106,6 +106,25 @@ export default function ContactPage() {
                 label="Location" 
                 value="Perambur, Chennai" 
               />
+            </div>
+
+            <div className="flex items-center gap-6 pt-8">
+              <a 
+                href="https://github.com/Balajisathya09" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/10 hover:border-primary/40 transition-all duration-500 shadow-lg group"
+              >
+                <Github className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/balaji-sathyanarayanan-2b4a5728b/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary/10 hover:border-primary/40 transition-all duration-500 shadow-lg group"
+              >
+                <Linkedin className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
+              </a>
             </div>
           </motion.div>
 
