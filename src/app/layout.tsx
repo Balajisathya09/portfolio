@@ -4,8 +4,18 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'BALAJI | Portfolio',
-  description: 'Premium Interaction Design & Creative Engineering.',
+  title: "Balaji S | MCA Graduate | Web Developer | UI/UX Designer",
+  description: "Official portfolio of Balaji S. MCA Graduate, Web Developer, UI/UX Designer, and Video Editor. Explore projects, skills, and contact information.",
+  keywords: [
+    "Balaji S",
+    "Balaji Portfolio",
+    "Web Developer",
+    "UI UX Designer",
+    "MCA Graduate",
+    "Next.js Developer",
+    "Frontend Developer",
+    "Chennai"
+  ],
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
@@ -21,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <meta name="google-site-verification" content="ltwGWi7ePYFuQYqurqeg-wI28mLXOiTkYW70wWUd_M4" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
