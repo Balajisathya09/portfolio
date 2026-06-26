@@ -157,6 +157,7 @@ export default function ContactPage() {
                     <input 
                       {...register("name")}
                       onMouseEnter={playHoverSound}
+                      suppressHydrationWarning
                       className={`w-full bg-white/5 border ${errors.name ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                       placeholder="Your Name"
                     />
@@ -168,6 +169,7 @@ export default function ContactPage() {
                       {...register("email")}
                       onMouseEnter={playHoverSound}
                       type="email" 
+                      suppressHydrationWarning
                       className={`w-full bg-white/5 border ${errors.email ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                       placeholder="email@example.com"
                     />
@@ -180,6 +182,7 @@ export default function ContactPage() {
                   <input 
                     {...register("phone")}
                     onMouseEnter={playHoverSound}
+                    suppressHydrationWarning
                     className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                     placeholder="9876543210"
                     maxLength={10}
@@ -192,6 +195,7 @@ export default function ContactPage() {
                   <input 
                     {...register("subject")}
                     onMouseEnter={playHoverSound}
+                    suppressHydrationWarning
                     className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500/50' : 'border-white/20'} p-5 text-white focus:outline-none focus:border-primary transition-all rounded-2xl placeholder:text-white/40 text-xs tracking-widest uppercase`} 
                     placeholder="Project Inquiry"
                   />
@@ -212,6 +216,7 @@ export default function ContactPage() {
 
                 <button 
                   disabled={isSubmitting}
+                  suppressHydrationWarning
                   className="group w-full bg-primary hover:bg-primary/90 text-black py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl shadow-primary/10"
                 >
                   {isSubmitting ? (
