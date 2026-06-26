@@ -93,11 +93,16 @@ export default function Navigation() {
             </Link>
           );
         })}
-        <button 
+        <a 
+          href="/Balaji-Resume.pdf"
+          download="Balaji-Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setIsOpen(false)}
           className="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-[0.4em] bg-primary px-10 py-4 rounded-full text-black hover:bg-white transition-all active:scale-95"
         >
           Resume <Download className="w-4 h-4" />
-        </button>
+        </a>
       </div>
     </>
   );
